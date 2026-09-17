@@ -1,0 +1,27 @@
+# ===== 敏感文件（禁止上传） =====
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+merchant_private_key.*
+
+# ===== 构建产物 =====
+*.exe
+*.dll
+*.so
+*.dylib
+*.tgz
+dist/
+out/
+target/
+
+# ===== 依赖目录 =====
+node_modules/
+vendor/
+
+# ===== 编辑器/系统 =====
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
