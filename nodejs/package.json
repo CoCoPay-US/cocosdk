@@ -1,0 +1,19 @@
+{
+  "name": "cocopay-sdk",
+  "version": "1.0.0",
+  "description": "CoCoPay 支付网关商户接入 SDK（代收/代付/余额查询/异步通知验签）",
+  "main": "index.js",
+  "scripts": {
+    "test": "node --test test/sdk.test.js"
+  },
+  "keywords": ["cocopay", "payment", "sdk", "cashapp", "paypal"],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CoCoPay-US/cocosdk.git",
+    "directory": "nodejs"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

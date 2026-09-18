@@ -1,0 +1,17 @@
+{
+  "name": "cocopay/sdk",
+  "description": "CoCoPay 支付网关商户接入 SDK（代收/代付/余额查询/异步通知验签）",
+  "type": "library",
+  "license": "MIT",
+  "require": {
+    "php": ">=7.4",
+    "ext-openssl": "*",
+    "ext-curl": "*",
+    "ext-json": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Cocopay\\Sdk\\": "src/"
+    }
+  }
+}
