@@ -72,6 +72,8 @@ System.out.println(resp.payUrl);
 | `queryPayOutOrder(req)` | `POST /v1/payment/pay_out/query` |
 | `queryBalance()` | `POST /v1/merchant/balance/query` |
 
+支付方式常量：`PaymentMethod.CASHAPP/PAYPAL/GOOGLEPAY/APPLEPAY`（代收）；`PaymentMethod.PAYOUT_CASHAPP/PAYOUT_PAYPAL/PAYOUT_DEBIT_CARD/PAYOUT_BANK_CARD`（代付）。
+
 ## 异步通知验签
 
 ```java

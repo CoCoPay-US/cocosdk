@@ -10,7 +10,7 @@ import (
 //
 // 代收/代付进入终态时触发：代收为 成功/失败/驳回/退款/冲正，代付为 成功/失败/驳回。
 // 商户应答：HTTP 200 且响应体纯文本 "SUCCESS"（去空白精确匹配）；
-// 未正确应答时平台按 3/5/10/15/30 分钟间隔重试最多 6 次，商户必须以 order_no(+state) 幂等。
+// 未正确应答时平台按 1/2/3/4/5 分钟间隔重试最多 6 次，商户必须以 order_no(+state) 幂等。
 type OrderNotify struct {
 	MchNo             string `json:"mch_no"`
 	OrderNo           string `json:"order_no"`

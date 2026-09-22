@@ -66,6 +66,8 @@ echo $resp['pay_url'];
 - 金额字段均为字符串（保留 2 位小数，如 `"100.00"`）：下单请求的 `amount`，查询响应的 `order_amount`/`transaction_amount`，通知报文的 `order_amount`/`transaction_amount`/`refund_amount`，余额查询的 `availableBalance`/`unsettledBalance`/`frozenBalance`/`withdrawalPendingBalance`/`payoutPendingBalance`。
 - `mch_no`、订单号等 ID 均按字符串处理。
 
+支付方式常量：`PaymentMethod::CASHAPP/PAYPAL/GOOGLEPAY/APPLEPAY`（代收）；`PaymentMethod::PAYOUT_CASHAPP/PAYOUT_PAYPAL/PAYOUT_DEBIT_CARD/PAYOUT_BANK_CARD`（代付）。
+
 ## 异步通知验签
 
 ```php

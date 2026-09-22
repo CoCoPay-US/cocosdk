@@ -67,6 +67,8 @@ func main() {
 
 订单状态常量：`CollectionState*` / `PayOutState*`；通知状态：`NotifyState*`。
 
+支付方式常量：代收 `PaymentMethodCashApp/PaymentMethodPayPal/PaymentMethodGooglePay/PaymentMethodApplePay`；代付 `PayOutMethodCashApp/PayOutMethodPayPal/PayOutMethodDebitCard/PayOutMethodBankCard`。
+
 ## 请求签名方式
 
 请求签名统一为 **RSA-PSS + SHA-256**（SDK 内置，无需配置）。
