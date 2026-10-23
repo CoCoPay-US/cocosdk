@@ -80,7 +80,8 @@ class CocopayClient {
 
   /**
    * 创建代收订单
-   * @param {Object} req {mch_order_no, currency, amount, payment_method, email, client_ip, mch_user_id, telephone?, notify_url?, extra?, card_valid?, routing_code?}
+   * @param {Object} req {mch_order_no, currency, amount, payment_method, email, client_ip, mch_user_id, telephone?, notify_url?, extra?, card_valid?, routing_code?, goods_infos?}
+   *        goods_infos: 物品信息（可选，最多50条）Array<{sku_id?, sku_name, price, num, sku_desc, sku_url}>
    * @returns {Promise<{order_no, mch_order_no, status, fail_reason, pay_url, extra}>}
    */
   createCollectionOrder(req) {

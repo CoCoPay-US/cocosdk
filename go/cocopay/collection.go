@@ -2,6 +2,16 @@ package cocopay
 
 import "context"
 
+// GoodsInfo 物品信息
+type GoodsInfo struct {
+	SkuID   string `json:"sku_id,omitempty"` // 商品ID（留空由平台自动生成）
+	SkuName string `json:"sku_name"`         // 商品名称
+	Price   string `json:"price"`            // 单价，单位元，保留2位小数
+	Num     int32  `json:"num"`              // 数量（>=1）
+	SkuDesc string `json:"sku_desc"`         // 商品描述（终端用户购买的产品名称）
+	SkuURL  string `json:"sku_url"`          // 商品详情页 URL（终端用户可直接访问的 H5/Web 页面，http/https）
+}
+
 // CreateCollectionOrderRequest 创建代收订单请求
 type CreateCollectionOrderRequest struct {
 	MchOrderNo    string `json:"mch_order_no"`           // 商户订单号（幂等键，重复提交返回原订单）
@@ -16,6 +26,7 @@ type CreateCollectionOrderRequest struct {
 	MchUserID     string `json:"mch_user_id"`            // 商户侧用户 ID（必填）
 	CardValid     string `json:"card_valid,omitempty"`   // debit_card 必填，卡有效期 MM/YYYY
 	RoutingCode   string `json:"routing_code,omitempty"` // bank_card + USD/GBP 必填：USD=ACH路由号 GBP=Sort Code
+	GoodsInfos    []*GoodsInfo `json:"goods_infos,omitempty"` // 物品信息（可选），最多 50 条
 }
 
 // CreateCollectionOrderReply 创建代收订单响应

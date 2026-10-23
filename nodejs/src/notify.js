@@ -18,8 +18,8 @@ function verifyOrderNotify(platformPublicKey, headers, body) {
 
 /**
  * 解析通知报文
- * @returns {{mch_no: string, order_no: string, mch_order_no: string, currency: string, order_amount: string, transaction_amount: string, state: string, complete_time: number, fail_reason: string, extra: string, account?: string, account_name?: string, refund_amount?: string}}
- * 金额字段（order_amount / transaction_amount / refund_amount）为字符串，保留 2 位小数
+ * @returns {{mch_no: string, order_no: string, mch_order_no: string, currency: string, order_amount: string, transaction_amount: string, state: string, complete_time: number, fail_reason: string, extra: string, account?: string, account_name?: string, refund_amount?: string, refund_no?: string}}
+ * 金额字段（order_amount / transaction_amount / refund_amount）为字符串，保留 2 位小数；refund_no 为平台退款单号（退款通知幂等键）
  */
 function parseOrderNotify(body) {
   return JSON.parse(body.toString('utf8'))

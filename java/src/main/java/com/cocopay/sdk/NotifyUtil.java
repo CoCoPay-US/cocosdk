@@ -69,6 +69,7 @@ public final class NotifyUtil {
         public String account;        // 代付通知额外字段
         public String accountName;    // 代付通知额外字段
         public String refundAmount;   // 退款通知额外字段（字符串，保留 2 位小数）
+        public String refundNo;       // 退款通知额外字段：平台退款单号（每次退款唯一，退款通知幂等键，对账用）
     }
 
     /** 解析通知报文 */

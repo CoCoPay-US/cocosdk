@@ -91,7 +91,8 @@ class CocopayClient
     /**
      * 创建代收订单
      *
-     * @param array $req {mch_order_no: string, currency: string, amount: string（金额字符串，保留 2 位小数，如 "100.00"）, payment_method, email, client_ip, mch_user_id, telephone?, notify_url?, extra?, card_valid?, routing_code?}
+     * @param array $req {mch_order_no: string, currency: string, amount: string（金额字符串，保留 2 位小数，如 "100.00"）, payment_method, email, client_ip, mch_user_id, telephone?, notify_url?, extra?, card_valid?, routing_code?, goods_infos?}
+     *                    goods_infos: 物品信息（可选，最多 50 条）array<int, array{sku_id?: string, sku_name: string, price: string, num: int, sku_desc: string, sku_url: string}>
      * @return array{order_no: string, mch_order_no: string, status: int, fail_reason: string, pay_url: string, extra: string}
      */
     public function createCollectionOrder(array $req): array

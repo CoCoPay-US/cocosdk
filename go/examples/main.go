@@ -44,6 +44,15 @@ func main() {
 		ClientIP:      "203.0.113.10",
 		MchUserID:     "U10001",
 		NotifyURL:     "https://merchant.example.com/notify",
+		GoodsInfos: []*cocopay.GoodsInfo{
+			{
+				SkuName: "Gold Coin Pack",
+				Price:   "19.99",
+				Num:     1,
+				SkuDesc: "100 gold coins",
+				SkuURL:  "https://merchant.example.com/products/100-coins",
+			},
+		},
 	})
 	if err != nil {
 		log.Fatal(err)

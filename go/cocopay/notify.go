@@ -27,6 +27,7 @@ type OrderNotify struct {
 	AccountName string `json:"account_name"`
 	// 退款通知额外字段
 	RefundAmount string `json:"refund_amount"` // 退款金额（字符串，保留 2 位小数）
+	RefundNo     string `json:"refund_no"`     // 平台退款单号（每次退款唯一，退款通知幂等键，对账用）
 }
 
 // ParseOrderNotify 解析通知报文

@@ -38,8 +38,8 @@ final class NotifyUtil
     /**
      * 解析通知报文
      *
-     * @return array{mch_no: string, order_no: string, mch_order_no: string, currency: string, order_amount: string, transaction_amount: string, state: string, complete_time: int, fail_reason: string, extra: string, account?: string, account_name?: string, refund_amount?: string}
-     *               金额字段（order_amount/transaction_amount/refund_amount）为字符串，保留 2 位小数（如 "100.00"）
+     * @return array{mch_no: string, order_no: string, mch_order_no: string, currency: string, order_amount: string, transaction_amount: string, state: string, complete_time: int, fail_reason: string, extra: string, account?: string, account_name?: string, refund_amount?: string, refund_no?: string}
+     *               金额字段（order_amount/transaction_amount/refund_amount）为字符串，保留 2 位小数（如 "100.00"）；refund_no 为平台退款单号（退款通知幂等键）
      */
     public static function parseOrderNotify(string $body): array
     {

@@ -157,6 +157,18 @@ public class CocopayClient {
         public String mchUserId;       // 商户侧用户 ID（必填）
         public String cardValid;       // debit_card 必填，MM/YYYY
         public String routingCode;     // bank_card + USD/GBP 必填
+        public List<GoodsInfo> goodsInfos; // 物品信息（可选），最多 50 条
+    }
+
+    /** 物品信息 */
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static class GoodsInfo {
+        public String skuId;      // 商品ID（留空由平台自动生成）
+        public String skuName;    // 商品名称
+        public String price;      // 单价，单位元，保留2位小数
+        public int num;           // 数量（>=1）
+        public String skuDesc;    // 商品描述（终端用户购买的产品名称）
+        public String skuUrl;     // 商品详情页 URL（终端用户可直接访问的 H5/Web 页面，http/https）
     }
 
     @JsonIgnoreProperties(ignoreUnknown = true)

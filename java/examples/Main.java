@@ -25,6 +25,13 @@ public class Main {
         collReq.clientIp = "203.0.113.10";
         collReq.mchUserId = "U10001";
         collReq.notifyUrl = "https://merchant.example.com/notify";
+        CocopayClient.GoodsInfo goods = new CocopayClient.GoodsInfo();
+        goods.skuName = "Gold Coin Pack";
+        goods.price = "100.00";
+        goods.num = 1;
+        goods.skuDesc = "100 gold coins";
+        goods.skuUrl = "https://merchant.example.com/products/100-coins";
+        collReq.goodsInfos = java.util.Collections.singletonList(goods);
         CocopayClient.CreateCollectionOrderReply collResp = client.createCollectionOrder(collReq);
         System.out.println("代收订单创建成功: " + collResp.orderNo + " " + collResp.payUrl);
 
@@ -33,7 +40,7 @@ public class Main {
         payReq.mchOrderNo = "PO" + System.currentTimeMillis();
         payReq.currency = "USD";
         payReq.amount = "50.00";
-        payReq.paymentMethod = "cash_app";
+        payReq.paymentMethod = "cashapp";
         payReq.account = "$johndoe";
         payReq.accountName = "John Doe";
         payReq.clientIp = "203.0.113.10";

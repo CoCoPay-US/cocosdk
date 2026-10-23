@@ -21,6 +21,15 @@ async function main() {
     client_ip: '203.0.113.10',
     mch_user_id: 'U10001',
     notify_url: 'https://merchant.example.com/notify',
+    goods_infos: [
+      {
+        sku_name: 'Gold Coin Pack',
+        price: '100.00',
+        num: 1,
+        sku_desc: '100 gold coins',
+        sku_url: 'https://merchant.example.com/products/100-coins',
+      },
+    ],
   })
   console.log('代收订单创建成功:', collResp.order_no, collResp.pay_url)
 
@@ -29,7 +38,7 @@ async function main() {
     mch_order_no: 'PO' + Date.now(),
     currency: 'USD',
     amount: '50.00',
-    payment_method: 'cash_app',
+    payment_method: 'cashapp',
     account: '$johndoe',
     account_name: 'John Doe',
     client_ip: '203.0.113.10',
