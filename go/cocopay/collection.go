@@ -14,19 +14,21 @@ type GoodsInfo struct {
 
 // CreateCollectionOrderRequest 创建代收订单请求
 type CreateCollectionOrderRequest struct {
-	MchOrderNo    string `json:"mch_order_no"`           // 商户订单号（幂等键，重复提交返回原订单）
-	Currency      string `json:"currency"`               // 币种：USD/HKD
-	Amount        string `json:"amount"`                 // 订单金额，单位元，保留2位小数
-	PaymentMethod string `json:"payment_method"`         // 支付方式：cashapp/paypal/googlepay/applepay/bank_card/debit_card
-	Telephone     string `json:"telephone,omitempty"`    // 付款人电话（可选）
-	Email         string `json:"email"`                  // 付款人邮箱（必填）
-	ClientIP      string `json:"client_ip"`              // 用户终端 IP（必填）
-	NotifyURL     string `json:"notify_url,omitempty"`   // 异步通知地址，为空用商户配置的 callback_url
-	Extra         string `json:"extra,omitempty"`        // 透传字段，回调原样返回
-	MchUserID     string `json:"mch_user_id"`            // 商户侧用户 ID（必填）
-	CardValid     string `json:"card_valid,omitempty"`   // debit_card 必填，卡有效期 MM/YYYY
-	RoutingCode   string `json:"routing_code,omitempty"` // bank_card + USD/GBP 必填：USD=ACH路由号 GBP=Sort Code
-	GoodsInfos    []*GoodsInfo `json:"goods_infos,omitempty"` // 物品信息（可选），最多 50 条
+	MchOrderNo    string       `json:"mch_order_no"`           // 商户订单号（幂等键，重复提交返回原订单）
+	Currency      string       `json:"currency"`               // 币种：USD/HKD
+	Amount        string       `json:"amount"`                 // 订单金额，单位元，保留2位小数
+	PaymentMethod string       `json:"payment_method"`         // 支付方式：cashapp/paypal/googlepay/applepay/bank_card/debit_card
+	Telephone     string       `json:"telephone,omitempty"`    // 付款人本机号码（纯数字字符串，可选）
+	AreaCode      string       `json:"area_code,omitempty"`    // 手机区号（纯数字字符串，不带+）
+	Email         string       `json:"email"`                  // 付款人邮箱（必填）
+	ClientIP      string       `json:"client_ip"`              // 用户终端 IP（必填）
+	NotifyURL     string       `json:"notify_url,omitempty"`   // 异步通知地址，为空用商户配置的 callback_url
+	Extra         string       `json:"extra,omitempty"`        // 透传字段，回调原样返回
+	MchUserID     string       `json:"mch_user_id"`            // 商户侧用户 ID（必填）
+	DeviceID      string       `json:"device_id"`              // 用户设备 ID（必填，≤64 字符），用于交易风控与拒付追踪
+	CardValid     string       `json:"card_valid,omitempty"`   // debit_card 必填，卡有效期 MM/YYYY
+	RoutingCode   string       `json:"routing_code,omitempty"` // bank_card + USD/GBP 必填：USD=ACH路由号 GBP=Sort Code
+	GoodsInfos    []*GoodsInfo `json:"goods_infos,omitempty"`  // 物品信息（可选），最多 50 条
 }
 
 // CreateCollectionOrderReply 创建代收订单响应

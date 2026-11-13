@@ -1,14 +1,18 @@
 package cocopay
 
 import (
+	"context"
 	"crypto"
 	"crypto/rand"
 	"crypto/rsa"
 	"crypto/sha256"
 	"crypto/x509"
 	"encoding/base64"
+	"encoding/json"
 	"encoding/pem"
 	"fmt"
+	"net/http"
+	"net/http/httptest"
 	"testing"
 )
 
@@ -119,5 +123,36 @@ func TestBuildSignContent(t *testing.T) {
 	want := `100000,1704067200,a1b2,{"a":1}`
 	if got != want {
 		t.Fatalf("got %q, want %q", got, want)
+	}
+}
+
+func TestCreateCollectionOrderSendsDeviceID(t *testing.T) {
+	key, err := rsa.GenerateKey(rand.Reader, 2048)
+	if err != nil {
+		t.Fatal(err)
+	}
+	var requestBody map[string]interface{}
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if err := json.NewDecoder(r.Body).Decode(&requestBody); err != nil {
+			t.Errorf("decode request body: %v", err)
+		}
+		w.Header().Set("Content-Type", "application/json")
+		_, _ = w.Write([]byte(`{"code":200,"data":{"order_no":"P10001"}}`))
+	}))
+	defer server.Close()
+
+	client, err := NewClient(Config{BaseURL: server.URL, MchNo: "100000", PrivateKey: key})
+	if err != nil {
+		t.Fatal(err)
+	}
+	resp, err := client.CreateCollectionOrder(context.Background(), &CreateCollectionOrderRequest{DeviceID: "device_9f3a2b7c"})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if resp.OrderNo != "P10001" {
+		t.Fatalf("unexpected order_no: %q", resp.OrderNo)
+	}
+	if requestBody["device_id"] != "device_9f3a2b7c" {
+		t.Fatalf("device_id not sent: %#v", requestBody)
 	}
 }

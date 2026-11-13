@@ -24,6 +24,7 @@ public class Main {
         collReq.email = "john@example.com";
         collReq.clientIp = "203.0.113.10";
         collReq.mchUserId = "U10001";
+        collReq.deviceId = "device_9f3a2b7c";
         collReq.notifyUrl = "https://merchant.example.com/notify";
         CocopayClient.GoodsInfo goods = new CocopayClient.GoodsInfo();
         goods.skuName = "Gold Coin Pack";
@@ -45,6 +46,7 @@ public class Main {
         payReq.accountName = "John Doe";
         payReq.clientIp = "203.0.113.10";
         payReq.mchUserId = "U10001";
+        payReq.deviceId = "device_9f3a2b7c";
         CocopayClient.CreatePayOutOrderReply payResp = client.createPayOutOrder(payReq);
         System.out.println("代付订单创建成功: " + payResp.orderNo + " status=" + payResp.status);
 

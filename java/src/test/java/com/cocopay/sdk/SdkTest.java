@@ -180,4 +180,36 @@ class SdkTest {
         assertEquals("100000,1704067200,a1b2,{\"a\":1}",
                 SignUtil.buildSignContent("100000", "1704067200", "a1b2", "{\"a\":1}"));
     }
+
+    @Test
+    void createCollectionOrderSendsDeviceId() throws Exception {
+        KeyPair kp = genKeyPair();
+        StringBuilder requestBody = new StringBuilder();
+        com.sun.net.httpserver.HttpServer server = com.sun.net.httpserver.HttpServer.create(
+                new java.net.InetSocketAddress("127.0.0.1", 0), 0);
+        server.createContext("/v1/payment/collection/create", exchange -> {
+            requestBody.append(new String(exchange.getRequestBody().readAllBytes(), StandardCharsets.UTF_8));
+            byte[] response = "{\"code\":200,\"data\":{\"order_no\":\"P10001\"}}"
+                    .getBytes(StandardCharsets.UTF_8);
+            exchange.getResponseHeaders().set("Content-Type", "application/json");
+            exchange.sendResponseHeaders(200, response.length);
+            exchange.getResponseBody().write(response);
+            exchange.close();
+        });
+        server.start();
+        try {
+            CocopayClient client = CocopayClient.Config.builder()
+                    .baseUrl("http://127.0.0.1:" + server.getAddress().getPort())
+                    .mchNo("100000")
+                    .privateKey(kp.getPrivate())
+                    .build();
+            CocopayClient.CreateCollectionOrderRequest req = new CocopayClient.CreateCollectionOrderRequest();
+            req.deviceId = "device_9f3a2b7c";
+            CocopayClient.CreateCollectionOrderReply resp = client.createCollectionOrder(req);
+            assertEquals("P10001", resp.orderNo);
+            assertTrue(requestBody.toString().contains("\"device_id\":\"device_9f3a2b7c\""));
+        } finally {
+            server.stop(0);
+        }
+    }
 }

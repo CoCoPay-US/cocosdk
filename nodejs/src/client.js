@@ -80,7 +80,8 @@ class CocopayClient {
 
   /**
    * 创建代收订单
-   * @param {Object} req {mch_order_no, currency, amount, payment_method, email, client_ip, mch_user_id, telephone?, notify_url?, extra?, card_valid?, routing_code?, goods_infos?}
+   * @param {Object} req {mch_order_no, currency, amount, payment_method, email, client_ip, mch_user_id, device_id, telephone?, area_code?, notify_url?, extra?, card_valid?, routing_code?, goods_infos?}
+   *        device_id: 用户设备 ID（必填，≤64 字符），用于交易风控与拒付追踪
    *        goods_infos: 物品信息（可选，最多50条）Array<{sku_id?, sku_name, price, num, sku_desc, sku_url}>
    * @returns {Promise<{order_no, mch_order_no, status, fail_reason, pay_url, extra}>}
    */
@@ -100,7 +101,7 @@ class CocopayClient {
   /**
    * 创建代付订单
    * 下单后可能需要两级审核（商户审核 status=2 / 管理员审核 status=3），全部通过后自动出款，以异步通知为准。
-   * @param {Object} req {mch_order_no, currency, amount, payment_method, account, account_name, client_ip, mch_user_id, account_phone?, email?, notify_url?, extra?, routing_code?, card_valid?}
+   * @param {Object} req {mch_order_no, currency, amount, payment_method, account, account_name, client_ip, mch_user_id, account_phone?, email?, notify_url?, extra?, routing_code?, card_valid?, device_id?}
    * @returns {Promise<{order_no, mch_order_no, status, fail_reason, extra}>}
    */
   createPayOutOrder(req) {
@@ -118,7 +119,7 @@ class CocopayClient {
 
   /**
    * 查询商户余额（余额各金额字段均为字符串，保留 2 位小数）
-   * @returns {Promise<{balances: Array<{currency: string, availableBalance: string, unsettledBalance: string, frozenBalance: string, withdrawalPendingBalance: string, payoutPendingBalance: string}>}>}
+   * @returns {Promise<{balances: Array<{currency: string, availableBalance: string, unsettledBalance: string, frozenBalance: string, withdrawalPendingBalance: string}>}>}
    */
   queryBalance() {
     return this._do(endpoints.PATH_BALANCE_QUERY, {mch_no: this.mchNo})

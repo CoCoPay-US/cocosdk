@@ -53,6 +53,7 @@ req.paymentMethod = "cashapp";
 req.email = "john@example.com";
 req.clientIp = "203.0.113.10";
 req.mchUserId = "U10001";
+req.deviceId = "device_9f3a2b7c"; // 用户设备 ID（必填，≤64 字符）
 
 CocopayClient.CreateCollectionOrderReply resp = client.createCollectionOrder(req);
 System.out.println(resp.payUrl);

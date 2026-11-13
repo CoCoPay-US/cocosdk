@@ -36,6 +36,7 @@ const resp = await client.createCollectionOrder({
   email: 'john@example.com',
   client_ip: '203.0.113.10',
   mch_user_id: 'U10001',
+  device_id: 'device_9f3a2b7c', // 用户设备 ID（必填，≤64 字符）
 })
 console.log(resp.pay_url)
 ```

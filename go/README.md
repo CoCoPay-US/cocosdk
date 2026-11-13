@@ -44,6 +44,7 @@ func main() {
         Email:         "john@example.com",
         ClientIP:      "203.0.113.10",
         MchUserID:     "U10001",
+        DeviceID:      "device_9f3a2b7c", // 用户设备 ID（必填，≤64 字符）
     })
     if err != nil {
         // err 为 *cocopay.APIError 时可读 Code/Reason/Message

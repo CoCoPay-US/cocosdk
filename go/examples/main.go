@@ -43,6 +43,7 @@ func main() {
 		Email:         "john@example.com",
 		ClientIP:      "203.0.113.10",
 		MchUserID:     "U10001",
+		DeviceID:      "device_9f3a2b7c",
 		NotifyURL:     "https://merchant.example.com/notify",
 		GoodsInfos: []*cocopay.GoodsInfo{
 			{
@@ -69,6 +70,7 @@ func main() {
 		AccountName:   "John Doe",
 		ClientIP:      "203.0.113.10",
 		MchUserID:     "U10001",
+		DeviceID:      "device_9f3a2b7c",
 	})
 	if err != nil {
 		log.Fatal(err)

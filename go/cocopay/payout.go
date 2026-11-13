@@ -18,6 +18,7 @@ type CreatePayOutOrderRequest struct {
 	MchUserID     string `json:"mch_user_id"`            // 商户侧用户 ID（必填）
 	RoutingCode   string `json:"routing_code,omitempty"` // bankcard + USD/GBP 必填：USD=ACH路由号 GBP=Sort Code
 	CardValid     string `json:"card_valid,omitempty"`   // card 必填，卡有效期 MM/YYYY
+	DeviceID      string `json:"device_id,omitempty"`      // 用户设备 ID（≤64 字符）
 }
 
 // CreatePayOutOrderReply 创建代付订单响应

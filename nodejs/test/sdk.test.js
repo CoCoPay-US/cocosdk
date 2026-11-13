@@ -125,3 +125,32 @@ test('通知报文解析（金额为字符串）', () => {
   assert.strictEqual(notify.state, 'success')
   assert.strictEqual(notify.order_amount, '100.50')
 })
+
+test('代收下单发送 device_id', async () => {
+  const http = require('http')
+  const {CocopayClient} = require('../src/client')
+  const {privateKey} = genKeyPair()
+  let requestBody
+  const server = http.createServer((req, res) => {
+    const chunks = []
+    req.on('data', (chunk) => chunks.push(chunk))
+    req.on('end', () => {
+      requestBody = JSON.parse(Buffer.concat(chunks).toString('utf8'))
+      res.setHeader('Content-Type', 'application/json')
+      res.end('{"code":200,"data":{"order_no":"P10001"}}')
+    })
+  })
+  await new Promise((resolve) => server.listen(0, '127.0.0.1', resolve))
+  try {
+    const client = new CocopayClient({
+      baseUrl: `http://127.0.0.1:${server.address().port}`,
+      mchNo: '100000',
+      privateKey,
+    })
+    const resp = await client.createCollectionOrder({device_id: 'device_9f3a2b7c'})
+    assert.strictEqual(resp.order_no, 'P10001')
+    assert.strictEqual(requestBody.device_id, 'device_9f3a2b7c')
+  } finally {
+    await new Promise((resolve) => server.close(resolve))
+  }
+})

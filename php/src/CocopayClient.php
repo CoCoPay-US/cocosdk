@@ -91,7 +91,8 @@ class CocopayClient
     /**
      * 创建代收订单
      *
-     * @param array $req {mch_order_no: string, currency: string, amount: string（金额字符串，保留 2 位小数，如 "100.00"）, payment_method, email, client_ip, mch_user_id, telephone?, notify_url?, extra?, card_valid?, routing_code?, goods_infos?}
+     * @param array $req {mch_order_no: string, currency: string, amount: string（金额字符串，保留 2 位小数，如 "100.00"）, payment_method, email, client_ip, mch_user_id, device_id, telephone?, area_code?, notify_url?, extra?, card_valid?, routing_code?, goods_infos?}
+     *                    device_id: 用户设备 ID（必填，≤64 字符），用于交易风控与拒付追踪
      *                    goods_infos: 物品信息（可选，最多 50 条）array<int, array{sku_id?: string, sku_name: string, price: string, num: int, sku_desc: string, sku_url: string}>
      * @return array{order_no: string, mch_order_no: string, status: int, fail_reason: string, pay_url: string, extra: string}
      */
@@ -115,7 +116,7 @@ class CocopayClient
      * 创建代付订单
      * 下单后可能需要两级审核（商户审核 status=2 / 管理员审核 status=3），全部通过后自动出款，以异步通知为准。
      *
-     * @param array $req {mch_order_no: string, currency: string, amount: string（金额字符串，保留 2 位小数）, payment_method, account, account_name, client_ip, mch_user_id, account_phone?, email?, notify_url?, extra?, routing_code?, card_valid?}
+     * @param array $req {mch_order_no: string, currency: string, amount: string（金额字符串，保留 2 位小数）, payment_method, account, account_name, client_ip, mch_user_id, account_phone?, email?, notify_url?, extra?, routing_code?, card_valid?, device_id?}
      * @return array{order_no: string, mch_order_no: string, status: int, fail_reason: string, extra: string}
      */
     public function createPayOutOrder(array $req): array
@@ -137,8 +138,8 @@ class CocopayClient
     /**
      * 查询商户余额
      *
-     * @return array{balances: array<int, array{currency: string, availableBalance: string, unsettledBalance: string, frozenBalance: string, withdrawalPendingBalance: string, payoutPendingBalance: string}>}
-     *               5 个余额字段均为字符串金额，保留 2 位小数（如 "100.00"）
+     * @return array{balances: array<int, array{currency: string, availableBalance: string, unsettledBalance: string, frozenBalance: string, withdrawalPendingBalance: string}>}
+     *               4 个余额字段均为字符串金额，保留 2 位小数（如 "100.00"）
      */
     public function queryBalance(): array
     {

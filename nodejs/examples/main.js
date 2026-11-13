@@ -20,6 +20,7 @@ async function main() {
     email: 'john@example.com',
     client_ip: '203.0.113.10',
     mch_user_id: 'U10001',
+    device_id: 'device_9f3a2b7c',
     notify_url: 'https://merchant.example.com/notify',
     goods_infos: [
       {
@@ -43,6 +44,7 @@ async function main() {
     account_name: 'John Doe',
     client_ip: '203.0.113.10',
     mch_user_id: 'U10001',
+    device_id: 'device_9f3a2b7c',
   })
   console.log('代付订单创建成功:', payResp.order_no, payResp.status)
 

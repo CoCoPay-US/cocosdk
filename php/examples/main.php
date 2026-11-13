@@ -28,6 +28,7 @@ $collResp = $client->createCollectionOrder([
     'email'          => 'john@example.com',
     'client_ip'      => '203.0.113.10',
     'mch_user_id'    => 'U10001',
+    'device_id'      => 'device_9f3a2b7c',
     'notify_url'     => 'https://merchant.example.com/notify',
     'goods_infos'    => [
         [
@@ -51,6 +52,7 @@ $payResp = $client->createPayOutOrder([
     'account_name'   => 'John Doe',
     'client_ip'      => '203.0.113.10',
     'mch_user_id'    => 'U10001',
+    'device_id'      => 'device_9f3a2b7c',
 ]);
 echo "代付订单创建成功: {$payResp['order_no']} status={$payResp['status']}\n";
 

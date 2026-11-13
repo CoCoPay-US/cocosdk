@@ -2,15 +2,16 @@ package cocopay
 
 // 代收订单状态
 const (
-	CollectionStateInit         = 1 // 已创建
-	CollectionStatePendingAudit = 2 // 待审核
-	CollectionStatePending      = 3 // 支付中
-	CollectionStateRejected     = 4 // 已驳回
-	CollectionStateSuccess      = 5 // 支付成功
-	CollectionStateFailed       = 6 // 支付失败
-	CollectionStateReversal     = 7 // 已冲正
-	CollectionStateChargeBack   = 8 // 已拒付
-	CollectionStateRefund       = 9 // 已退款
+	CollectionStateInit         = 1  // 已创建
+	CollectionStatePendingAudit = 2  // 待审核
+	CollectionStatePending      = 3  // 支付中
+	CollectionStateRejected     = 4  // 已驳回
+	CollectionStateSuccess      = 5  // 支付成功
+	CollectionStateFailed       = 6  // 支付失败
+	CollectionStateReversal     = 7  // 已冲正
+	CollectionStateChargeBack   = 8  // 已拒付
+	CollectionStateRefund       = 9  // 已退款
+	CollectionStatePendingRisk  = 10 // 风控待审
 )
 
 // 代付订单状态

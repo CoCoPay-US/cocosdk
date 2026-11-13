@@ -14,7 +14,6 @@ type BalanceItem struct {
 	UnsettledBalance         string `json:"unsettledBalance"`         // 未结算余额（T+N 结算中）
 	FrozenBalance            string `json:"frozenBalance"`            // 冻结余额（代付冻结）
 	WithdrawalPendingBalance string `json:"withdrawalPendingBalance"` // 提现中余额（当前固定为 0）
-	PayoutPendingBalance     string `json:"payoutPendingBalance"`     // 代付处理中余额（等于冻结余额）
 }
 
 // QueryBalanceReply 查询商户余额响应

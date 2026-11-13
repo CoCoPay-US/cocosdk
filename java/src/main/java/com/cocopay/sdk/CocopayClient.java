@@ -149,12 +149,14 @@ public class CocopayClient {
         public String currency;        // 币种：USD/HKD（必填）
         public String amount;          // 订单金额，单位元保留2位小数（必填）
         public String paymentMethod;   // 支付方式（必填）
-        public String telephone;
+        public String telephone;       // 付款人本机号码（纯数字字符串）
+        public String areaCode;        // 手机区号（纯数字字符串，不带+）
         public String email;           // 付款人邮箱（必填）
         public String clientIp;        // 用户终端 IP（必填）
         public String notifyUrl;
         public String extra;
         public String mchUserId;       // 商户侧用户 ID（必填）
+        public String deviceId;        // 用户设备 ID（必填，≤64 字符），用于交易风控与拒付追踪
         public String cardValid;       // debit_card 必填，MM/YYYY
         public String routingCode;     // bank_card + USD/GBP 必填
         public List<GoodsInfo> goodsInfos; // 物品信息（可选），最多 50 条
@@ -231,6 +233,7 @@ public class CocopayClient {
         public String mchUserId;       // 商户侧用户 ID（必填）
         public String routingCode;     // bankcard + USD/GBP 必填
         public String cardValid;       // card 必填，MM/YYYY
+        public String deviceId;        // 用户设备 ID（≤64 字符）
     }
 
     @JsonIgnoreProperties(ignoreUnknown = true)
@@ -286,8 +289,6 @@ public class CocopayClient {
         public String frozenBalance;
         @JsonProperty("withdrawalPendingBalance")
         public String withdrawalPendingBalance;
-        @JsonProperty("payoutPendingBalance")
-        public String payoutPendingBalance;
     }
 
     @JsonIgnoreProperties(ignoreUnknown = true)
